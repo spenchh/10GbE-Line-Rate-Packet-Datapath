@@ -1,12 +1,11 @@
-module packet_v1 #(
-  DATA_WDITH [7:0] #message_type
-)(
-  sequence_number [31:0],
-  symbol_id [15:0],
-  bid_price [31:0],
-  ask_price [31:0],
-  bid_size [31:0],
-  ask_size [31:0],
-  timestamp [63:0]
+module packet_v1(
+  input [7:0] message_type,
+  input [31:0] sequence_number,
+  input [15:0] symbol_id,
+  input [31:0] bid_price,
+  input [31:0] ask_price,
+  input [31:0] bid_size,
+  input [31:0] ask_size,
+  input [63:0] timestamp 
 );
 
