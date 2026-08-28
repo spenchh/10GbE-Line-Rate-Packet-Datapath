@@ -20,3 +20,14 @@ binary_ask_price = f"{ask_price:0{bits_thirty_two}b}"
 binary_bid_size = f"{bid_size:0{bits_thirty_two}b}"
 binary_ask_size = f"{ask_size:0{bits_thirty_two}b}"
 binary_timestamp = f"{timestamp:0{bits_sixty_four}b}"
+
+packet_bits = (
+  binary_message 
+  + binary_sequence_number
+  + binary_symbol_id
+  + binary_bid_price
+  + binary_ask_price
+  + binary_bid_size
+  + binary_ask_size
+  + binary_timestamp
+)
