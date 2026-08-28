@@ -29,7 +29,6 @@ PACKET_W = (
     + TIMESTAMP_W
 )
 
-
 def pack_uint(name, value, width):
     """
     Convert an unsigned integer into a fixed-width binary string
