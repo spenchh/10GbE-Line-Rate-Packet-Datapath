@@ -31,3 +31,5 @@ packet_bits = (
   + binary_ask_size
   + binary_timestamp
 )
+
+print(len(packet_bits))
