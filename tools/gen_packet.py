@@ -20,14 +20,21 @@ TIMESTAMP_W = 64
 
 # Total packet width:
 # 8 + 32 + 16 + 32 + 32 + 32 + 32 + 64 = 248 bits
-PACKET_W = 248
+PACKET_W = (
+    + MESSAGE_TYPE_W
+    + SEQUENCE_NUMBER_W
+    + SYMBOL_ID_W
+    + PRICE_W
+    + SIZE_W
+    + TIMESTAMP_W
+)
 
 
 def pack_uint(name, value, width):
     """
     Convert an unsigned integer into a fixed-width binary string
 
-    This prevents silent overflow. If a value does not fit in its assigned
+    This prevents silent overflow. If a value doesn't fit in its assigned
     bit width, the function raises an error instead of creating a bad packet
     """
     max_value = (1 << width) - 1
