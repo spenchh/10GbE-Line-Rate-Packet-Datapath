@@ -1,5 +1,5 @@
-# Example market-data fields.
-# These are normal integer values before we pack them into a binary packet.
+# Example market-data fields
+# These are normal integer values before we pack them into a binary packet
 message_type = 1
 sequence_number = 42
 symbol_id = 7
@@ -9,8 +9,8 @@ bid_size = 800
 ask_size = 500
 timestamp = 123456789
 
-# Field widths in bits.
-# These must match the packet format that the SystemVerilog decoder expects.
+# Field widths in bits
+# These must match the packet format that the SystemVerilog decoder expects
 MESSAGE_TYPE_W = 8
 SEQUENCE_NUMBER_W = 32
 SYMBOL_ID_W = 16
@@ -25,10 +25,10 @@ PACKET_W = 248
 
 def pack_uint(name, value, width):
     """
-    Convert an unsigned integer into a fixed-width binary string.
+    Convert an unsigned integer into a fixed-width binary string
 
     This prevents silent overflow. If a value does not fit in its assigned
-    bit width, the function raises an error instead of creating a bad packet.
+    bit width, the function raises an error instead of creating a bad packet
     """
     max_value = (1 << width) - 1
 
@@ -41,8 +41,8 @@ def pack_uint(name, value, width):
     return f"{value:0{width}b}"
 
 
-# Pack each field into a binary string and concatenate them in packet order.
-# The SystemVerilog decoder must slice packet_in using this same order.
+# Pack each field into a binary string and concatenate them in packet order
+# The SystemVerilog decoder must slice packet_in using this same order
 packet_bits = (
     pack_uint("message_type", message_type, MESSAGE_TYPE_W)
     + pack_uint("sequence_number", sequence_number, SEQUENCE_NUMBER_W)
@@ -54,12 +54,12 @@ packet_bits = (
     + pack_uint("timestamp", timestamp, TIMESTAMP_W)
 )
 
-# Make sure the final packet is exactly the expected width.
-# If this fails, one of the fields is the wrong size.
+# Make sure the final packet is exactly the expected width
+# If this fails, one of the fields is the wrong size
 assert len(packet_bits) == PACKET_W
 
-# Convert the binary string to an integer, then print it as hex.
-# 248 bits / 4 = 62 hex digits.
+# Convert the binary string to an integer, then print it as hex
+# 248 bits / 4 = 62 hex digits
 packet_int = int(packet_bits, 2)
 packet_hex = f"{packet_int:062x}"
 
