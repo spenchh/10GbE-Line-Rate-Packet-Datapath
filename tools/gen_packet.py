@@ -32,4 +32,8 @@ packet_bits = (
   + binary_timestamp
 )
 
-print(len(packet_bits))
+packet_hex = f"{int(packet_bits, 2):062x}"
+
+print("packet width:", len(packet_bits))
+print("packet bits:", packet_bits)
+print("packet hex:", packet_hex)
