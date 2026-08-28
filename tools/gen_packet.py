@@ -12,25 +12,30 @@ bits_sixteen = 16
 bits_thirty_two = 32
 bits_sixty_four = 64
 
-binary_message = f"{message:0{bits_eight}b}"
-binary_sequence_number = f"{sequence_number:0{bits_thirty_two}b}"
-binary_symbol_id = f"{symbol_id:0{bits_sixteen}b}"
-binary_bid_price = f"{bid_price:0{bits_thirty_two}b}"
-binary_ask_price = f"{ask_price:0{bits_thirty_two}b}"
-binary_bid_size = f"{bid_size:0{bits_thirty_two}b}"
-binary_ask_size = f"{ask_size:0{bits_thirty_two}b}"
-binary_timestamp = f"{timestamp:0{bits_sixty_four}b}"
+# Range check helper function
+def pack_uint(name, value, width):
+    max_value = (1 << width) - 1
+
+    if value < 0 or value > max_value:
+        raise ValueError(
+            f"{name}={value} does not fit in {width} bits "
+            f"(max={max_value})"
+        )
+    return f"{value:0{width}b}"
+
 
 packet_bits = (
-  binary_message 
-  + binary_sequence_number
-  + binary_symbol_id
-  + binary_bid_price
-  + binary_ask_price
-  + binary_bid_size
-  + binary_ask_size
-  + binary_timestamp
+    pack_uint("message", message, 8)
+    + pack_uint("sequence_number", sequence_number, 32)
+    + pack_uint("symbol_id", symbol_id, 16)
+    + pack_uint("bid_price", bid_price, 32)
+    + pack_uint("ask_price", ask_price, 32)
+    + pack_uint("bid_size", bid_size, 32)
+    + pack_uint("ask_size", ask_size, 32)
+    + pack_uint("timestamp", timestamp, 64)
 )
+
+assert len(packet_bits) == 248
 
 packet_hex = f"{int(packet_bits, 2):062x}"
 
