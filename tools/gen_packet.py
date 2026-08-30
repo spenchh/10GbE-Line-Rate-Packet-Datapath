@@ -24,8 +24,8 @@ PACKET_W = (
     + MESSAGE_TYPE_W
     + SEQUENCE_NUMBER_W
     + SYMBOL_ID_W
-    + PRICE_W
-    + SIZE_W
+    + (2 * PRICE_W)
+    + (2 * SIZE_W)
     + TIMESTAMP_W
 )
 
@@ -72,3 +72,13 @@ packet_hex = f"{packet_int:062x}"
 print("packet width:", len(packet_bits))
 print("packet bits:", packet_bits)
 print("packet hex:", packet_hex)
+
+print("expected fields:")
+print("message_type:", message_type)
+print("sequence_number:", sequence_number)
+print("symbol_id:", symbol_id)
+print("bid_price:", bid_price)
+print("ask_price:", ask_price)
+print("bid_size:", bid_size)
+print("ask_size:", ask_size)
+print("timestamp:", timestamp)
