@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-09-21T21:51:22.508Z",
+  "browser": "153.0.4234.48",
+  "base": "http://127.0.0.1:3001",
+  "checked": [
+    "All eight desktop tabs activate.",
+    "Module search and expansion expose the selected contract.",
+    "Source search has a working empty state.",
+    "Packet input preserves 64-bit precision, rejects overflow, injects/rejects a crossed quote and resets.",
+    "Roadmap progress persists across a reload in an isolated browser profile.",
+    "Handbook, both images and favicon return HTTP 200.",
+    "All eight mobile views fit a 390px viewport without page-level horizontal overflow.",
+    "No browser page errors were observed."
+  ],
+  "failures": []
+}
